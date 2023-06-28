@@ -1,0 +1,5 @@
+﻿@model Produto
+
+<h1>Deseja realmente deletar @Model.Name?</h1>
+<a role="button" asp-action="Index" asp-controller="Home" asp-area="">Não, voltar</a>
+<a role="button" asp-action="Excluir" asp-controller="Home" asp-area="" asp-route-id="@Model.Id">Sim, excluir</a>
