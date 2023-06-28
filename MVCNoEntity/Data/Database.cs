@@ -50,6 +50,22 @@ public class Database
         }
     }
 
+    public static void UpdateProduct(Produto produto)
+    {
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            string query = "UPDATE Produtos SET Nome=@Nome, Price=@Price WHERE Id=@Id";
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@Nome", produto.Name);
+                command.Parameters.AddWithValue("@Price", produto.Price);
+                command.Parameters.AddWithValue("@Id", produto.Id);
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+    }
+
     public static void DeleteProduct(int id)
     {
         using (SqlConnection connection = new SqlConnection(connectionString))

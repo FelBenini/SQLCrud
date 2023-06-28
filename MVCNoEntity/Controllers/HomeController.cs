@@ -42,6 +42,24 @@ namespace MVCNoEntity.Controllers
             return View(product);
         }
 
+        public IActionResult Update(int id)
+        {
+            Produto product = Database.GetSingleProdut(id);
+            if (product == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(product);
+        }
+
+        [HttpPost]
+        public IActionResult Atualiza(Produto product)
+        {
+            Database.UpdateProduct(product);
+            return RedirectToAction("Index");
+
+        }
+
         public IActionResult Produto(int id)
         {
             Produto product = Database.GetSingleProdut(id);
