@@ -9,7 +9,7 @@ public class Database
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile("appsettings.json")
     .Build();
-    private static readonly string connectionString = configuration.GetConnectionString("SQL_CRUD");
+    static readonly string connectionString = configuration.GetConnectionString("SQL_CRUD");
 
     public static List<Produto> getAllProducts()
     {

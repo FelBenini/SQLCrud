@@ -3,9 +3,11 @@
     ViewData["Title"] = "Atualizando" + Model.Name;
 }
 
-<form method="post" asp-action="Atualiza" asp-controller="Home">
-    <input type="hidden" asp-for="Id"/>
-    <input type="text" asp-for="Name"/>
-    <input type="number" step="0.01" asp-for="Price" />
+<form method="post" class="w-50 m-auto" asp-action="Atualiza" asp-controller="Home">
+    <input required type="hidden" asp-for="Id"/>
+    <label asp-for="Name">Nome:</label>
+    <input required class="form-control" type="text" asp-for="Name" />
+    <label asp-for="Price">Preço:</label>
+    <input required class="form-control" type="number" step="0.01" asp-for="Price" />
     <button type="submit">Atualizar</button>
 </form>
