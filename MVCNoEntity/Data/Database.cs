@@ -23,10 +23,12 @@ public class Database
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
+                    string description = reader["Description"] != DBNull.Value ? reader["Description"].ToString() : "Sem descrição";
                     Produto product = new Produto();
                     product.Id = (int)reader["Id"];
                     product.Name = (string)reader["Nome"];
                     product.Price = Convert.ToSingle(reader["Price"]);
+                    product.Description = description;
                     produtos.Add(product);
                 }
                 reader.Close();
@@ -39,11 +41,12 @@ public class Database
     {
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
-            string query = "INSERT INTO Produtos(Nome, Price) VALUES(@Name, @Price)";
+            string query = "INSERT INTO Produtos(Nome, Price, Description) VALUES(@Name, @Price, @Description)";
             using (SqlCommand command = new SqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@Name", produto.Name);
                 command.Parameters.AddWithValue("@Price", produto.Price);
+                command.Parameters.AddWithValue("@Description", produto.Description);
                 connection.Open();
                 command.ExecuteNonQuery();
             }
@@ -54,11 +57,12 @@ public class Database
     {
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
-            string query = "UPDATE Produtos SET Nome=@Nome, Price=@Price WHERE Id=@Id";
+            string query = "UPDATE Produtos SET Nome=@Nome, Price=@Price, Description=@Description WHERE Id=@Id";
             using (SqlCommand command = new SqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@Nome", produto.Name);
                 command.Parameters.AddWithValue("@Price", produto.Price);
+                command.Parameters.AddWithValue("@Description", produto.Description);
                 command.Parameters.AddWithValue("@Id", produto.Id);
                 connection.Open();
                 command.ExecuteNonQuery();
@@ -84,7 +88,7 @@ public class Database
     {
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
-            string query = "SELECT Id, Nome, Price FROM Produtos WHERE Id = @Id";
+            string query = "SELECT * FROM Produtos WHERE Id = @Id";
             using (SqlCommand command = new SqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@Id", id);
@@ -92,10 +96,12 @@ public class Database
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
+                    string description = reader["Description"] != DBNull.Value ? reader["Description"].ToString() : "Sem descrição";
                     Produto product = new Produto();
                     product.Id = (int)reader["Id"];
                     product.Name = (string)reader["Nome"];
                     product.Price = Convert.ToSingle(reader["Price"]);
+                    product.Description = description;
                     return product;
                 }
                 reader.Close();

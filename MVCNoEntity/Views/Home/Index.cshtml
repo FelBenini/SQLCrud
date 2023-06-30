@@ -9,21 +9,25 @@
     <th>#</th>
     <th>Nome</th>
     <th>Preço</th>
+    <th>Descrição</th>
     <th>Ações</th>
     </thead>
+    <tbody>
     @{
         foreach (Produto produto in Model)
         {
-            <tbody>
+            <tr>
             <th scope="col">@produto.Id</th>
             <td> @produto.Name</td>
-            <td>@produto.Price</td>
+            <td>R$ @produto.Price.ToString("N2")</td>
+            <td>@produto.Description</td>
             <td>
                 <a role="button" class="btn btn-success" asp-action="Produto" asp-controller="Home" asp-route-id="@produto.Id">Visualizar</a>
                 <a asp-action="Delete" class="btn btn-danger" asp-controller="Home" asp-route-id="@produto.Id">Deletar</a>
                 <a asp-action="Update" class="btn btn-primary" asp-controller="Home" asp-route-id="@produto.Id">Atualizar</a>
             </td>
-            </tbody>
+            </tr>
         }
     }
+    </tbody>
 </table>

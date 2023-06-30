@@ -20,3 +20,15 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+tbody tr:nth-child(odd) {
+    background-color: #80808010;
+}
+
+.table {
+    border-radius: 12px;
+}
+
+td, th {
+    vertical-align: middle;
+}
