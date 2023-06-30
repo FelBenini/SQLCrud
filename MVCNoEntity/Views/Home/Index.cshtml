@@ -13,21 +13,29 @@
     <th>Ações</th>
     </thead>
     <tbody>
-    @{
-        foreach (Produto produto in Model)
-        {
-            <tr>
-            <th scope="col">@produto.Id</th>
-            <td> @produto.Name</td>
-            <td>R$ @produto.Price.ToString("N2")</td>
-            <td>@produto.Description</td>
-            <td>
-                <a role="button" class="btn btn-success" asp-action="Produto" asp-controller="Home" asp-route-id="@produto.Id">Visualizar</a>
-                <a asp-action="Delete" class="btn btn-danger" asp-controller="Home" asp-route-id="@produto.Id">Deletar</a>
-                <a asp-action="Update" class="btn btn-primary" asp-controller="Home" asp-route-id="@produto.Id">Atualizar</a>
-            </td>
-            </tr>
+        @{
+            foreach (Produto produto in Model)
+            {
+                <tr>
+                    <th scope="col">@produto.Id</th>
+                    <td> @produto.Name</td>
+                    <td>R$ @produto.Price.ToString("N2")</td>
+                    <td>@produto.Description</td>
+                    <td>
+                        <div class="btn-group">
+                            <a role="button" class="btn btn-outline-success" asp-action="Produto" asp-controller="Home" asp-route-id="@produto.Id">
+                                <i class="bi bi-eye-fill"></i>
+                            </a>
+                            <a asp-action="Delete" class="btn btn-outline-danger" asp-controller="Home" asp-route-id="@produto.Id">
+                                <i class="bi bi-trash3-fill"></i>
+                            </a>
+                            <a asp-action="Update" class="btn btn-outline-primary" asp-controller="Home" asp-route-id="@produto.Id">
+                                <i class="bi bi-pencil-fill"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
         }
-    }
     </tbody>
 </table>
